@@ -1,0 +1,75 @@
+name: Shedwatch
+options:
+  bundleIdPrefix: com.shimondeitel.shedwatch
+  deploymentTarget:
+    iOS: "17.0"
+  createIntermediateGroups: true
+  groupSortPosition: top
+settings:
+  base:
+    MARKETING_VERSION: "1.0"
+    CURRENT_PROJECT_VERSION: "1"
+    SWIFT_VERSION: "5.0"
+    DEVELOPMENT_TEAM: "W7Q885Q59C"
+    CODE_SIGN_STYLE: Automatic
+    IPHONEOS_DEPLOYMENT_TARGET: "17.0"
+    TARGETED_DEVICE_FAMILY: "1"
+    ENABLE_USER_SCRIPT_SANDBOXING: "YES"
+targets:
+  Shedwatch:
+    type: application
+    platform: iOS
+    sources:
+      - path: Shedwatch
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.shimondeitel.shedwatch
+        TARGETED_DEVICE_FAMILY: "1"
+        INFOPLIST_FILE: Shedwatch/Info.plist
+        ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
+        ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME: AccentColor
+        ENABLE_PREVIEWS: "YES"
+        GENERATE_INFOPLIST_FILE: "NO"
+  ShedwatchTests:
+    type: bundle.unit-test
+    platform: iOS
+    sources:
+      - path: ShedwatchTests
+      - path: Shedwatch.storekit
+    dependencies:
+      - target: Shedwatch
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.shimondeitel.shedwatch.tests
+        GENERATE_INFOPLIST_FILE: "YES"
+        TARGETED_DEVICE_FAMILY: "1"
+  ShedwatchUITests:
+    type: bundle.ui-testing
+    platform: iOS
+    sources:
+      - path: ShedwatchUITests
+    dependencies:
+      - target: Shedwatch
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.shimondeitel.shedwatch.uitests
+        GENERATE_INFOPLIST_FILE: "YES"
+        TARGETED_DEVICE_FAMILY: "1"
+schemes:
+  Shedwatch:
+    build:
+      targets:
+        Shedwatch: all
+        ShedwatchTests: [test]
+        ShedwatchUITests: [test]
+    run:
+      config: Debug
+      storeKitConfiguration: Shedwatch.storekit
+    test:
+      config: Debug
+      storeKitConfiguration: Shedwatch.storekit
+      targets:
+        - ShedwatchTests
+        - ShedwatchUITests
+    archive:
+      config: Release
